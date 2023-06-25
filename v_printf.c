@@ -44,4 +44,3 @@ void v_printf(const char *format, va_list args)
 		format++;
 	}
 }
-		

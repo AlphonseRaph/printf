@@ -2,6 +2,15 @@
 #include <stdarg.h>
 #include "main.h"
 
+/**
+ * _printf - produces output
+ *
+ * @format: format used
+ *
+ * Return: always (0)
+ *
+ */
+
 int _printf(const char *format, ...)
 {
 	va_list args;

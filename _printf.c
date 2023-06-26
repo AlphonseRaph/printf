@@ -7,17 +7,18 @@
  *
  * @format: format used
  *
- * Return: always (0)
+ * Return: leng(success)
  *
  */
 
 int _printf(const char *format, ...)
 {
 	va_list args;
+	int leng;
 
 	va_start(args, format);
-	v_printf(format, args);
+	leng = v_printf(format, args);
 
 	va_end(args);
-	return (0);
+	return (leng);
 }

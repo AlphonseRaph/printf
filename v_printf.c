@@ -12,7 +12,11 @@ void v_printf(const char *format, va_list args)
 	int state = 0;
 	char ch;
 	const char *str;
-
+	
+	if (format == NULL)
+	{
+		return;
+	}
 	while (*format)
 	{
 		if (state == 0)
@@ -20,7 +24,9 @@ void v_printf(const char *format, va_list args)
 			if (*format == '%')
 				state = 1;
 			else
+			{
 				putchar(*format);
+			}
 		}
 		else if (state == 1)
 		{
@@ -40,7 +46,6 @@ void v_printf(const char *format, va_list args)
 			}
 			state = 0;
 		}
-
 		format++;
 	}
 }

@@ -14,7 +14,7 @@
 int _printf(const char *format, ...)
 {
 	va_list args;
-	int leng;
+	unsigned int leng = 0;
 
 	va_start(args, format);
 	leng = v_printf(format, args);

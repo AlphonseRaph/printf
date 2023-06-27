@@ -9,12 +9,12 @@
  *
  * Return: The length of the output
  */
-int v_printf(const char *format, va_list args)
+unsigned int v_printf(const char *format, va_list args)
 {
 	int st = 0;
 	char ch;
 	const char *str;
-	int leng = 0;
+	unsigned int leng = 0;
 
 	while (*format)
 	{
@@ -23,10 +23,7 @@ int v_printf(const char *format, va_list args)
 			if (*format == '%')
 				st = 1;
 			else
-			{
-				putchar(*format);
-				leng++;
-			}
+				leng += _putchar(*format);
 		}
 		else if (st == 1)
 		{
@@ -34,20 +31,14 @@ int v_printf(const char *format, va_list args)
 			{
 			case 'c':
 				ch = va_arg(args, int);
-				putchar(ch);
-				leng++;
+				leng += _putchar(ch);
 				break;
 			case 's':
 				str = va_arg(args, const char *);
-				while (*str)
-				{
-					putchar(*str++);
-					leng++;
-				}
+				leng += _puts(str);
 				break;
 			case '%':
-				putchar('%');
-				leng++;
+				leng += _putchar('%');
 				break;
 			}
 			st = 0;
@@ -57,4 +48,3 @@ int v_printf(const char *format, va_list args)
 	}
 	return (leng);
 }
-

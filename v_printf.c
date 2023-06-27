@@ -3,49 +3,58 @@
 #include "main.h"
 
 /**
- * v_printf - Custom printf function
+ * v_printf - printf function
  * @format: The format string
  * @args: Variable arguments list
+ *
+ * Return: The length of the output
  */
-void v_printf(const char *format, va_list args)
+int v_printf(const char *format, va_list args)
 {
-	int state = 0;
+	int st = 0;
 	char ch;
 	const char *str;
-	
-	if (format == NULL)
-	{
-		return;
-	}
+	int leng = 0;
+
 	while (*format)
 	{
-		if (state == 0)
+		if (st == 0)
 		{
 			if (*format == '%')
-				state = 1;
+				st = 1;
 			else
 			{
 				putchar(*format);
+				leng++;
 			}
 		}
-		else if (state == 1)
+		else if (st == 1)
 		{
 			switch (*format)
 			{
 			case 'c':
 				ch = va_arg(args, int);
 				putchar(ch);
+				leng++;
 				break;
 			case 's':
 				str = va_arg(args, const char *);
 				while (*str)
 				{
 					putchar(*str++);
+					leng++;
 				}
 				break;
+			case '%':
+				putchar('%');
+				leng++;
+				break;
 			}
-			state = 0;
+			st = 0;
 		}
+
 		format++;
 	}
+	return (leng);
 }
+

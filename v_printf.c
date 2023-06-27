@@ -7,17 +7,15 @@
  * @format: The format string
  * @args: Variable arguments list
  */
-int v_printf(const char *format, va_list args)
+void v_printf(const char *format, va_list args)
 {
-
-	int sum = 0;
 	int state = 0;
 	char ch;
 	const char *str;
 	
 	if (format == NULL)
 	{
-		return (-1);
+		return;
 	}
 	while (*format)
 	{
@@ -28,7 +26,6 @@ int v_printf(const char *format, va_list args)
 			else
 			{
 				putchar(*format);
-				sum++;
 			}
 		}
 		else if (state == 1)
@@ -38,14 +35,12 @@ int v_printf(const char *format, va_list args)
 			case 'c':
 				ch = va_arg(args, int);
 				putchar(ch);
-				sum++;
 				break;
 			case 's':
 				str = va_arg(args, const char *);
 				while (*str)
 				{
 					putchar(*str++);
-					sum++;
 				}
 				break;
 			}
@@ -53,5 +48,4 @@ int v_printf(const char *format, va_list args)
 		}
 		format++;
 	}
-	return (sum);
 }
